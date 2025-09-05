@@ -1,0 +1,255 @@
+
+yes. here's some answers for the report I got from office hours
+
+Slide 2- Is this for tuned beta only (all other hyperparameters at default) ? If so, is there a threshold? Are these going to be reviewed against a threshold?
+Yes. Keep all others at default. There isn't a threshold.
+Slide 2 - By show "VAE generated images grid" is this the squared grid.png or final_recon.png?
+grid.png for both
+Slide 3 - Explain observations: is this both qualitative & quantitative? (images + loss values?)
+Yes. Explanation should be similar to previous homework. A good approach is making a hypothesis about how the losses should work between L2 and L1 and explain whether your results follow your hypothesis or not. The loss values alone are not a good indication of whether one model is better than the other.
+Slide 9 - same as slide 2, do we need to display grid.png for each model?
+Yes. grid.png for each model.
+Slide 10 - For comparing models, do we need to include the hyperparameters of each model as part of our explanation?
+You can, but the focus should be on what the models are doing differently that gives you the results that you see.
+
+
+
+VAE:
+python train.py --config configs/config_vae.yaml
+python generate_images.py --config_file configs/config_vae.yaml
+python -m pytorch_fid outputs/vae/images tests/assets/fid-stats-fashion.npz --device <your-device>
+
+GAN:
+python train.py --config configs/config_gan.yaml
+python generate_images.py --config_file configs/config_gan.yaml
+python -m pytorch_fid outputs/gan/images tests/assets/fid-stats-fashion.npz --device <your-device>
+
+Diffusion:
+python train.py --config configs/config_diffusion.yaml
+python generate_images.py --config_file configs/config_diffusion.yaml
+python -m pytorch_fid outputs/diffusion/images tests/assets/fid-stats-fashion.npz --device <your-device>
+
+BETA = 1
+Using CUDA (gpu: NVIDIA GeForce RTX 3080).
+Val Epoch: [-1][0/938]  Loss 196.284 (196.284)  Time 0.027 (0.027)
+Val completed in 0.069 min. Loss 189.177
+Epoch: [0][0/938]       Loss 198.084 (198.084)  Loss_recon 184.287 (184.287)    Loss_kl 13.798 (13.798) Time 0.067 (0.067)
+Epoch: [1][0/938]       Loss 57.040 (67.263)    Loss_recon 57.008 (66.841)      Loss_kl 0.033 (0.422)   Time 0.006 (0.003)
+Epoch: [2][0/938]       Loss 54.139 (60.335)    Loss_recon 54.127 (60.113)      Loss_kl 0.012 (0.222)   Time 0.007 (0.004)
+Epoch: [3][0/938]       Loss 53.844 (57.927)    Loss_recon 53.835 (57.775)      Loss_kl 0.009 (0.152)   Time 0.008 (0.004)
+Epoch: [4][0/938]       Loss 52.371 (56.704)    Loss_recon 52.362 (56.588)      Loss_kl 0.009 (0.116)   Time 0.005 (0.004)
+Val Epoch: [4][0/938]   Loss 50.409 (50.409)    Time 0.002 (0.002)
+Val completed in 0.066 min. Loss 56.909
+Completed in 5.211
+Model saved to ./outputs/vae/vae_mnist.pth
+
+
+BETA = 2
+Using CUDA (gpu: NVIDIA GeForce RTX 3080).
+Val Epoch: [-1][0/938]  Loss 208.189 (208.189)  Time 0.031 (0.031)
+Val completed in 0.062 min. Loss 193.208
+Epoch: [0][0/938]       Loss 211.882 (211.882)  Loss_recon 184.287 (184.287)    Loss_kl 13.798 (13.798) Time 0.054 (0.054)
+Epoch: [1][0/938]       Loss 57.065 (67.634)    Loss_recon 57.007 (66.886)      Loss_kl 0.029 (0.374)   Time 0.008 (0.003)
+Epoch: [2][0/938]       Loss 54.150 (60.528)    Loss_recon 54.139 (60.139)      Loss_kl 0.006 (0.195)   Time 0.009 (0.003)
+Epoch: [3][0/938]       Loss 53.846 (58.057)    Loss_recon 53.839 (57.795)      Loss_kl 0.003 (0.131)   Time 0.009 (0.003)
+Epoch: [4][0/938]       Loss 52.374 (56.803)    Loss_recon 52.368 (56.604)      Loss_kl 0.003 (0.099)   Time 0.009 (0.003)
+Val Epoch: [4][0/938]   Loss 50.411 (50.411)    Time 0.002 (0.002)
+Val completed in 0.065 min. Loss 56.917
+Completed in 5.121
+Model saved to ./outputs/vae/vae_mnist.pth
+
+BETA = 4
+Val completed in 0.065 min. Loss 201.270
+Epoch: [0][0/938]       Loss 239.477 (239.477)  Loss_recon 184.287 (184.287)    Loss_kl 13.798 (13.798) Time 0.048 (0.048)
+Epoch: [1][0/938]       Loss 57.109 (68.349)    Loss_recon 57.008 (66.907)      Loss_kl 0.025 (0.361)   Time 0.006 (0.004)
+Epoch: [2][0/938]       Loss 54.159 (60.898)    Loss_recon 54.142 (60.151)      Loss_kl 0.004 (0.187)   Time 0.008 (0.004)
+Epoch: [3][0/938]       Loss 53.849 (58.307)    Loss_recon 53.843 (57.805)      Loss_kl 0.002 (0.125)   Time 0.009 (0.004)
+Epoch: [4][0/938]       Loss 52.376 (56.990)    Loss_recon 52.373 (56.613)      Loss_kl 0.001 (0.094)   Time 0.009 (0.003)
+Val Epoch: [4][0/938]   Loss 50.413 (50.413)    Time 0.002 (0.002)
+Val completed in 0.064 min. Loss 56.919
+
+
+
+Using CUDA (gpu: NVIDIA GeForce RTX 3080).
+Val Epoch: [-1][0/938]  Loss 779.666 (779.666)  Time 0.032 (0.032)
+Val completed in 0.066 min. Loss 386.686
+Epoch: [0][0/938]       Loss 874.172 (874.172)  Loss_recon 184.287 (184.287)    Loss_kl 13.798 (13.798) Time 0.048 (0.048)
+Epoch: [1][0/938]       Loss 58.264 (84.704)    Loss_recon 57.009 (66.926)      Loss_kl 0.025 (0.356)   Time 0.009 (0.004)
+Epoch: [2][0/938]       Loss 54.350 (69.365)    Loss_recon 54.143 (60.161)      Loss_kl 0.004 (0.184)   Time 0.009 (0.004)
+Epoch: [3][0/938]       Loss 53.897 (63.994)    Loss_recon 53.844 (57.812)      Loss_kl 0.001 (0.124)   Time 0.007 (0.004)
+Epoch: [4][0/938]       Loss 52.387 (61.264)    Loss_recon 52.375 (56.619)      Loss_kl 0.000 (0.093)   Time 0.006 (0.004)
+Val Epoch: [4][0/938]   Loss 50.429 (50.429)    Time 0.002 (0.002)
+Val completed in 0.065 min. Loss 56.922
+Completed in 5.172
+
+BETA 0.5
+Model saved to ./outputs/vae/vae_mnist.pth
+PS C:\Users\trung\Documents\CS 7643 DL\a4_generative_models_v4> python train.py --config configs/config_vae.yaml
+Using CUDA (gpu: NVIDIA GeForce RTX 3080).
+Val Epoch: [-1][0/938]  Loss 190.331 (190.331)  Time 0.026 (0.026)
+Val completed in 0.068 min. Loss 187.162
+Epoch: [0][0/938]       Loss 191.185 (191.185)  Loss_recon 184.287 (184.287)    Loss_kl 13.798 (13.798) Time 0.051 (0.051)
+Epoch: [1][0/938]       Loss 57.020 (67.059)    Loss_recon 56.992 (66.746)      Loss_kl 0.056 (0.626)   Time 0.005 (0.003)
+Epoch: [2][0/938]       Loss 54.129 (60.226)    Loss_recon 54.112 (60.057)      Loss_kl 0.034 (0.338)   Time 0.006 (0.003)
+Epoch: [3][0/938]       Loss 53.837 (57.851)    Loss_recon 53.821 (57.732)      Loss_kl 0.033 (0.238)   Time 0.008 (0.003)
+Epoch: [4][0/938]       Loss 52.360 (56.645)    Loss_recon 52.342 (56.551)      Loss_kl 0.037 (0.187)   Time 0.010 (0.003)
+Val Epoch: [4][0/938]   Loss 50.409 (50.409)    Time 0.002 (0.002)
+Val completed in 0.068 min. Loss 56.898
+Completed in 5.301
+Model saved to ./outputs/vae/vae_mnist.pth
+
+BETA 0.1
+Val Epoch: [-1][0/938]  Loss 185.569 (185.569)  Time 0.030 (0.030)
+Val completed in 0.072 min. Loss 185.550
+Epoch: [0][0/938]       Loss 185.666 (185.666)  Loss_recon 184.287 (184.287)    Loss_kl 13.798 (13.798) Time 0.066 (0.066)
+Epoch: [1][0/938]       Loss 56.995 (66.742)    Loss_recon 56.862 (65.837)      Loss_kl 1.335 (9.050)   Time 0.006 (0.004)
+Epoch: [2][0/938]       Loss 53.924 (60.034)    Loss_recon 53.743 (59.494)      Loss_kl 1.808 (5.405)   Time 0.009 (0.004)
+Epoch: [3][0/938]       Loss 53.906 (57.680)    Loss_recon 53.588 (57.220)      Loss_kl 3.180 (4.598)   Time 0.005 (0.004)
+Epoch: [4][0/938]       Loss 51.705 (56.462)    Loss_recon 50.901 (55.967)      Loss_kl 8.041 (4.949)   Time 0.005 (0.004)
+Val Epoch: [4][0/938]   Loss 49.838 (49.838)    Time 0.002 (0.002)
+Val completed in 0.067 min. Loss 55.486
+Completed in 5.423
+
+
+BETA 0.05
+Val Epoch: [-1][0/938]  Loss 184.973 (184.973)  Time 0.027 (0.027)
+Val completed in 0.065 min. Loss 185.348
+Epoch: [0][0/938]       Loss 184.976 (184.976)  Loss_recon 184.287 (184.287)    Loss_kl 13.798 (13.798) Time 0.057 (0.057)
+Epoch: [1][0/938]       Loss 56.912 (66.463)    Loss_recon 56.332 (64.362)      Loss_kl 11.599 (42.019) Time 0.008 (0.004)
+Epoch: [2][0/938]       Loss 52.237 (59.470)    Loss_recon 50.183 (57.740)      Loss_kl 41.077 (34.616) Time 0.010 (0.004)
+Epoch: [3][0/938]       Loss 52.600 (56.736)    Loss_recon 49.615 (54.693)      Loss_kl 59.693 (40.859) Time 0.006 (0.004)
+Epoch: [4][0/938]       Loss 47.979 (55.213)    Loss_recon 43.533 (52.747)      Loss_kl 88.916 (49.312) Time 0.009 (0.004)
+Val Epoch: [4][0/938]   Loss 47.841 (47.841)    Time 0.002 (0.002)
+Val completed in 0.064 min. Loss 45.568
+Completed in 5.011
+Model saved to ./outputs/vae/vae_mnist.pth
+
+
+BETA 0.01
+Val Epoch: [-1][0/938]  Loss 184.497 (184.497)  Time 0.025 (0.025)
+Val completed in 0.064 min. Loss 185.187
+Epoch: [0][0/938]       Loss 184.425 (184.425)  Loss_recon 184.287 (184.287)    Loss_kl 13.798 (13.798) Time 0.066 (0.066)
+Epoch: [1][0/938]       Loss 48.073 (60.735)    Loss_recon 42.198 (55.627)      Loss_kl 587.456 (510.838)       Time 0.009 (0.003)
+Epoch: [2][0/938]       Loss 38.948 (51.090)    Loss_recon 31.822 (45.368)      Loss_kl 712.636 (572.132)       Time 0.009 (0.003)
+Epoch: [3][0/938]       Loss 36.998 (46.495)    Loss_recon 29.198 (40.268)      Loss_kl 779.977 (622.724)       Time 0.004 (0.003)
+Epoch: [4][0/938]       Loss 32.969 (43.593)    Loss_recon 24.662 (36.920)      Loss_kl 830.716 (667.294)       Time 0.003 (0.003)
+Val Epoch: [4][0/938]   Loss 31.948 (31.948)    Time 0.001 (0.001)
+Val completed in 0.063 min. Loss 22.933
+Completed in 4.971
+
+
+
+BETA 0.005
+Val Epoch: [-1][0/938]  Loss 184.438 (184.438)  Time 0.030 (0.030)
+Val completed in 0.063 min. Loss 185.167
+Epoch: [0][0/938]       Loss 184.356 (184.356)  Loss_recon 184.287 (184.287)    Loss_kl 13.798 (13.798) Time 0.051 (0.051)
+Epoch: [1][0/938]       Loss 42.807 (56.979)    Loss_recon 37.316 (52.207)      Loss_kl 1098.212 (954.283)      Time 0.006 (0.004)
+Epoch: [2][0/938]       Loss 33.356 (46.617)    Loss_recon 26.915 (41.324)      Loss_kl 1288.204 (1058.659)     Time 0.006 (0.003)
+Epoch: [3][0/938]       Loss 30.635 (41.512)    Loss_recon 23.552 (35.749)      Loss_kl 1416.535 (1152.538)     Time 0.009 (0.003)
+Epoch: [4][0/938]       Loss 26.743 (38.270)    Loss_recon 19.460 (32.148)      Loss_kl 1456.670 (1224.365)     Time 0.005 (0.004)
+Val Epoch: [4][0/938]   Loss 25.755 (25.755)    Time 0.002 (0.002)
+Val completed in 0.063 min. Loss 16.676
+Completed in 5.001
+Model saved to ./outputs/vae/vae_mnist.pth
+
+
+
+beta 0.001
+Val Epoch: [-1][0/938]  Loss 184.379 (184.379)  Time 0.027 (0.027)
+Val completed in 0.066 min. Loss 185.147
+Epoch: [0][0/938]       Loss 184.288 (184.288)  Loss_recon 184.287 (184.287)    Loss_kl 13.798 (13.798) Time 0.057 (0.057)
+Epoch: [1][0/938]       Loss 30.233 (48.023)    Loss_recon 29.139 (47.178)      Loss_kl 10944.113 (8447.804)    Time 0.006 (0.004)
+Epoch: [2][0/938]       Loss 18.831 (35.553)    Loss_recon 17.610 (34.569)      Loss_kl 12207.473 (9837.132)    Time 0.007 (0.003)
+Epoch: [3][0/938]       Loss 15.367 (29.115)    Loss_recon 14.124 (28.059)      Loss_kl 12432.414 (10558.825)   Time 0.007 (0.003)
+Epoch: [4][0/938]       Loss 11.652 (25.080)    Loss_recon 10.493 (23.989)      Loss_kl 11593.526 (10906.157)   Time 0.005 (0.003)
+Val Epoch: [4][0/938]   Loss 10.323 (10.323)    Time 0.002 (0.002)
+Val completed in 0.066 min. Loss 7.006
+Completed in 5.209
+
+
+beta 0.03  L1
+Val completed in 0.063 min. Loss 372.700
+Epoch: [0][0/938]       Loss 372.059 (372.059)  Loss_recon 371.645 (371.645)    Loss_kl 13.798 (13.798) Time 0.050 (0.050)
+Epoch: [1][0/938]       Loss 110.970 (134.177)  Loss_recon 105.976 (122.613)    Loss_kl 166.487 (385.476)       Time 0.006 (0.004)
+Epoch: [2][0/938]       Loss 97.071 (117.355)   Loss_recon 90.826 (108.806)     Loss_kl 208.173 (284.965)       Time 0.009 (0.004)
+Epoch: [3][0/938]       Loss 93.379 (109.073)   Loss_recon 87.177 (101.402)     Loss_kl 206.703 (255.727)       Time 0.005 (0.004)
+Epoch: [4][0/938]       Loss 82.040 (103.757)   Loss_recon 74.319 (96.298)      Loss_kl 257.350 (248.639)       Time 0.005 (0.004)
+Val Epoch: [4][0/938]   Loss 78.824 (78.824)    Time 0.001 (0.001)
+
+beta 0.01 L1
+Val completed in 0.063 min. Loss 372.619
+Epoch: [0][0/938]       Loss 371.783 (371.783)  Loss_recon 371.645 (371.645)    Loss_kl 13.798 (13.798) Time 0.046 (0.046)
+Epoch: [1][0/938]       Loss 101.546 (125.167)  Loss_recon 95.068 (115.625)     Loss_kl 647.811 (954.196)       Time 0.006 (0.003)
+Epoch: [2][0/938]       Loss 84.361 (107.015)   Loss_recon 76.436 (98.865)      Loss_kl 792.493 (815.010)       Time 0.005 (0.004)
+Epoch: [3][0/938]       Loss 76.613 (97.493)    Loss_recon 67.565 (89.302)      Loss_kl 904.819 (819.084)       Time 0.009 (0.004)
+Epoch: [4][0/938]       Loss 66.903 (91.102)    Loss_recon 56.849 (82.600)      Loss_kl 1005.359 (850.146)      Time 0.009 (0.004)
+Val Epoch: [4][0/938]   Loss 64.019 (64.019)    Time 0.003 (0.003)
+Val completed in 0.065 min. Loss 51.132
+
+beta 0.03 L2
+Val completed in 0.062 min. Loss 185.267
+Epoch: [0][0/938]       Loss 184.701 (184.701)  Loss_recon 184.287 (184.287)    Loss_kl 13.798 (13.798) Time 0.056 (0.056)
+Epoch: [1][0/938]       Loss 56.119 (65.746)    Loss_recon 54.201 (62.512)      Loss_kl 63.927 (107.803)        Time 0.008 (0.003)
+Epoch: [2][0/938]       Loss 48.997 (57.976)    Loss_recon 44.391 (54.668)      Loss_kl 153.509 (110.293)       Time 0.011 (0.004)
+Epoch: [3][0/938]       Loss 48.380 (54.565)    Loss_recon 42.363 (50.578)      Loss_kl 200.557 (132.895)       Time 0.005 (0.003)
+Epoch: [4][0/938]       Loss 44.299 (52.577)    Loss_recon 37.295 (47.952)      Loss_kl 233.448 (154.166)       Time 0.004 (0.003)
+Val Epoch: [4][0/938]   Loss 44.431 (44.431)    Time 0.003 (0.003)
+Val completed in 0.064 min. Loss 37.397
+
+
+
+data:
+  dataset: mnist # mnist
+train:
+  batch_size: 64
+  lr: 0.0001
+  n_epochs: 10
+  num_workers: 4 # change this based on number of cores on your CPU. 4 is sufficient for 1 gpu. If unsure leave at 1.
+network:
+  model: vae # vae, gan, diffusion
+  hidden_dim: 512 # used for VAE and gan
+  latent_dim: 20 # used for VAE or gan
+vae:
+  vae_recon_loss: l2 # l1 or l2
+  beta: 0.03
+diffusion:
+  time_dim: 128
+  timesteps: 500
+optimizer:
+  type: "adamw" # adamw or sgd
+  weight_decay: 0.0 #0.001
+gan:
+  leaky: False
+
+Epoch: [0][0/938]       Loss 184.701 (184.701)  Loss_recon 184.287 (184.287)    Loss_kl 13.798 (13.798) Time 0.054 (0.054)
+Epoch: [1][0/938]       Loss 56.119 (65.746)    Loss_recon 54.201 (62.512)      Loss_kl 63.927 (107.803)        Time 0.012 (0.003)
+Epoch: [2][0/938]       Loss 48.997 (57.976)    Loss_recon 44.391 (54.668)      Loss_kl 153.509 (110.293)       Time 0.008 (0.003)
+Epoch: [3][0/938]       Loss 48.380 (54.565)    Loss_recon 42.363 (50.578)      Loss_kl 200.557 (132.895)       Time 0.008 (0.003)
+Epoch: [4][0/938]       Loss 44.299 (52.577)    Loss_recon 37.295 (47.952)      Loss_kl 233.448 (154.166)       Time 0.007 (0.003)
+Val Epoch: [4][0/938]   Loss 44.431 (44.431)    Time 0.002 (0.002)
+Val completed in 0.084 min. Loss 37.397
+Completed in 6.498
+Model saved to ./outputs/vae/vae_mnist.pth
+Using CUDA (gpu: NVIDIA GeForce RTX 3080).
+C:\Users\trung\miniconda3\envs\cs7643-a3-nlp\python.exe: No module named pytorch_fid
+PS C:\Users\trung\Documents\CS 7643 DL\a4_generative_models_v4> python train.py --config configs/config_vae.yaml
+>> python generate_images.py --config_file configs/config_vae.yaml
+>> python -m pytorch_fid outputs/vae/images tests/assets/fid-stats-fashion.npz --device cuda
+Using CUDA (gpu: NVIDIA GeForce RTX 3080).
+Val Epoch: [-1][0/938]  Loss 183.734 (183.734)  Time 0.039 (0.039)
+Val completed in 0.064 min. Loss 183.700
+Epoch: [0][0/938]       Loss 183.203 (183.203)  Loss_recon 183.003 (183.003)    Loss_kl 6.666 (6.666)   Time 0.057 (0.057)
+Epoch: [1][0/938]       Loss 50.630 (62.588)    Loss_recon 47.379 (59.484)      Loss_kl 108.345 (103.474)       Time 0.006 (0.003)
+Epoch: [2][0/938]       Loss 44.635 (55.327)    Loss_recon 37.636 (51.225)      Loss_kl 233.323 (136.749)       Time 0.007 (0.003)
+Epoch: [3][0/938]       Loss 42.805 (52.066)    Loss_recon 34.958 (46.936)      Loss_kl 261.551 (171.005)       Time 0.007 (0.003)
+Epoch: [4][0/938]       Loss 41.611 (50.115)    Loss_recon 32.909 (44.168)      Loss_kl 290.075 (198.220)       Time 0.007 (0.003)
+Val Epoch: [4][0/938]   Loss 42.083 (42.083)    Time 0.002 (0.002)
+Val completed in 0.066 min. Loss 33.375
+Epoch: [5][0/938]       Loss 41.151 (48.760)    Loss_recon 30.848 (42.153)      Loss_kl 343.441 (220.256)       Time 0.009 (0.003)
+Epoch: [6][0/938]       Loss 39.861 (47.744)    Loss_recon 29.937 (40.583)      Loss_kl 330.825 (238.684)       Time 0.006 (0.003)
+Epoch: [7][0/938]       Loss 41.788 (46.948)    Loss_recon 31.454 (39.325)      Loss_kl 344.478 (254.091)       Time 0.010 (0.003)
+Epoch: [8][0/938]       Loss 41.799 (46.300)    Loss_recon 30.910 (38.291)      Loss_kl 362.992 (266.964)       Time 0.010 (0.003)
+Epoch: [9][0/938]       Loss 42.299 (45.755)    Loss_recon 31.159 (37.421)      Loss_kl 371.335 (277.801)       Time 0.008 (0.003)
+Val Epoch: [9][0/938]   Loss 39.837 (39.837)    Time 0.007 (0.007)
+Val completed in 0.065 min. Loss 32.645
+Completed in 5.071
